@@ -21,8 +21,12 @@ class CityWeather(Base):
     temp = Column(Float)
     temp_min = Column(Float)
     temp_max = Column(Float)
-    date_create = Column(DateTime, server_default=func.now())
-    date_update = Column(DateTime, index=True, onupdate=func.now())
+    date_create = Column(DateTime(timezone=True), server_default=func.now())
+    date_update = Column(
+        DateTime(timezone=True),
+        index=True,
+        onupdate=func.now()
+    )
 
     def __init__(self, data: dict):
         self.id = data.get('id')
